@@ -1,0 +1,24 @@
+:root{
+
+    --blue: #41798a;
+    --green: #39d62d;
+
+}
+
+.text-white{
+
+    color: white
+
+}
+
+.bg-nav{
+
+    background-color: var(--blue);
+
+}
+
+.dropdown:hover{
+
+    background-color: transparent !important;
+
+}

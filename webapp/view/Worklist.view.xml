@@ -1,0 +1,87 @@
+<mvc:View controllerName="altrotest.altrotest.controller.Worklist" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.f.semantic" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+    <semantic:SemanticPage id="page" headerPinnable="false" toggleHeaderOnTitleClick="false">
+        <semantic:titleHeading>
+            <Title text="{i18n>worklistTitle}" level="H2" />
+        </semantic:titleHeading>
+
+        <semantic:content>
+            <Table
+                id="table"
+                width="auto"
+                items="{
+                    path: '/Customers',
+                    sorter: {
+                        path: 'ContactName',
+                        descending: false
+                    }
+                }"
+                noDataText="{worklistView>/tableNoDataText}"
+                busyIndicatorDelay="{worklistView>/tableBusyDelay}"
+                growing="true"
+                growingScrollToLoad="true"
+                updateFinished=".onUpdateFinished">
+                <headerToolbar>
+                    <OverflowToolbar class="bg-nav">
+
+                        <Title id="tableHeader" text="{worklistView>/worklistTableTitle}" level="H3" class="text-white" />
+
+                        <ToolbarSpacer />
+
+                        <l:VerticalLayout
+                            class="sapUiContentPadding"
+                            width="100%">
+                            <l:content>
+                                <Button text="Open Action Sheet"
+                                    press="handleOpen"
+                                    class="sapUiSmallMarginBottom" />
+                            </l:content>
+                        </l:VerticalLayout>
+
+                        <SearchField id="searchField" tooltip="{i18n>worklistSearchTooltip}" search=".onSearch">
+                            <layoutData>
+                                <OverflowToolbarLayoutData maxWidth="200px" priority="NeverOverflow" />
+                            </layoutData>
+                        </SearchField>
+
+                    </OverflowToolbar>
+                    
+                </headerToolbar>
+
+                <columns>
+                    <Column id="nameColumn">
+                        <Text text="{i18n>tableNameColumnTitle}" id="nameColumnTitle" />
+                    </Column>
+                    <Column id="referentColumn">
+                        <Text text="{i18n>tableReferentColumnTitle}" id="referentColumnTitle" />
+                    </Column>
+                    <Column id="unitNumberColumn">
+                        <Text text="{i18n>tableUnitNumberColumnTitle}" id="unitNumberColumnTitle" />
+                    </Column>
+                    <Column id="unitIndirizzoColumn">
+                        <Text text="{i18n>tableUnitIndirizzoColumnTitle}" id="unitIndirizzoColumnTitle" />
+                    </Column>
+                    <Column id="unitSaveButton" />
+                </columns>
+
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <ObjectIdentifier title="{ContactName}" />
+                            <ObjectIdentifier title="{ContactName}" />
+                            <ObjectNumber unit="{Phone}" />
+                            <ObjectIdentifier title="{Address}" />
+
+                            <FlexBox alignItems="End" justifyContent="End">
+                                <Button id="show" text="" icon="sap-icon://show" press=".onPress" />
+                            </FlexBox>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </semantic:content>
+
+        <semantic:sendEmailAction>
+            <semantic:SendEmailAction id="shareEmail" press=".onShareEmailPress" />
+        </semantic:sendEmailAction>
+    </semantic:SemanticPage>
+</mvc:View>
